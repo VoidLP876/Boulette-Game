@@ -13,7 +13,7 @@ paddles = [
 ]
 oldTime = pygame.time.get_ticks()
 IsGameRunning = 2
-accueil = pygame.image.load("Assets/Nyan.png").convert()
+accueil = pygame.image.load("Assets/backgroundv3.png").convert()
 accueil = pygame.transform.scale(accueil, (ScreenWidth,ScreenHeight))
 playbutton = pygame.image.load("Assets/Play.png").convert_alpha()
 fond = pygame.image.load("Assets/backgroundv1.png").convert()
@@ -34,6 +34,12 @@ def refresh():
 while IsGameRunning == 2:
     fenetre.blit(accueil, (0,0))
     fenetre.blit(playbutton,(650, 360))
+    """pos_souris = pygame.mouse.get_pos()
+    bouton_souris = pygame.mouse.get_pressed()
+    if bouton_souris[2]:
+        print("test")
+        print(pos_souris)"""
+    
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == KEYDOWN:
