@@ -20,4 +20,4 @@ class Paddle:
         return self.x < 340 or self.x + self.width >= 1060
 
     def isTouchingWallY(self):
-        return self.y < 0 or self.y + self.h >= 720
+        return self.y < 0 or self.y + self.height >= 720

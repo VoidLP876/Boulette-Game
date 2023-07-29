@@ -10,10 +10,10 @@ ScreenWidth, ScreenHeight = fenetre.get_size()
 
 ball = Ball(700, 360, 500)
 paddles = [
-    Paddle(650, 100, 100, 20, "Assets/paddlebleuv1.png"),
-    Paddle(440, 310, 20, 100, "Assets/paddlejaunev1.png"),
-    Paddle(650, 620, 100, 20, "Assets/paddlerougev1.png"),
-    Paddle(960, 310, 20, 100, "Assets/paddlevertv1.png"),
+    Paddle(650, 50, 100, 20, "Assets/paddlebleuv1.png"),
+    Paddle(390, 310, 20, 100, "Assets/paddlejaunev1.png"),
+    Paddle(650, 650, 100, 20, "Assets/paddlerougev1.png"),
+    Paddle(990, 310, 20, 100, "Assets/paddlevertv1.png"),
 ]
 
 
@@ -72,17 +72,46 @@ while IsGameRunning == 1:
     keys_pressed = pygame.key.get_pressed()
 
 
-    #JOUEUR 1
+    #J1 BLEU
 
-    if keys_pressed[pygame.K_LEFT]:
+    if keys_pressed[pygame.K_w]:
         paddles[0].move(deltaTime, -1, 0)
         if(paddles[0].isTouchingWallX()):
             paddles[0].move(deltaTime, 1, 0)
-    if keys_pressed[pygame.K_RIGHT]:
+    if keys_pressed[pygame.K_x]:
         paddles[0].move(deltaTime, 1, 0)
         if(paddles[0].isTouchingWallX()):
             paddles[0].move(deltaTime, -1, 0)
 
+    #J2 JAUNE
+    if keys_pressed[pygame.K_a]:
+        paddles[1].move(deltaTime, -1, 1)
+        if(paddles[1].isTouchingWallY()):
+            paddles[1].move(deltaTime, 1, 1)
+    if keys_pressed[pygame.K_q]:
+        paddles[1].move(deltaTime, 1, 1)
+        if(paddles[1].isTouchingWallY()):
+            paddles[1].move(deltaTime, -1, 1)
+
+    #J3 ROUGE
+    if keys_pressed[pygame.K_LEFT]:
+        paddles[2].move(deltaTime, -1, 0)
+        if(paddles[2].isTouchingWallX()):
+            paddles[2].move(deltaTime, 1, 0)
+    if keys_pressed[pygame.K_DOWN]:
+        paddles[2].move(deltaTime, 1, 0)
+        if(paddles[2].isTouchingWallX()):
+            paddles[2].move(deltaTime, -1, 0)
+
+    #J4 VERT
+    if keys_pressed[pygame.K_KP9]:
+        paddles[3].move(deltaTime, -1, 1)
+        if(paddles[3].isTouchingWallY()):
+            paddles[3].move(deltaTime, 1, 1)
+    if keys_pressed[pygame.K_KP6]:
+        paddles[3].move(deltaTime, 1, 1)
+        if(paddles[3].isTouchingWallY()):
+            paddles[3].move(deltaTime, -1, 1)
 
         #LEAVE GAME
     for event in pygame.event.get():
