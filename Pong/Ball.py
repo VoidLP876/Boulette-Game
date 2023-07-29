@@ -22,21 +22,21 @@ class Ball:
             self.Vy *= -1
             self.y += self.Vy * dt
 
-    def RetargetX(self, player, isInverted):
+    def RetargetX(self, player, isInverted, rotation):
         offset = self.y - (player.y + player.height / 2)
-        if isInverted:
-            offset = (player.y + player.height / 2) - self.y
         t = offset / (player.height / 2)
-        angle = pi / 2 * t
+        if rotation:
+            t *= -1
+        angle = pi / 4 * t
         self.Vx = self.speed * cos(angle) * isInverted
         self.Vy = self.speed * sin(angle) * isInverted
 
-    def RetargetY(self, player, isInverted):
+    def RetargetY(self, player, isInverted, rotation):
         offset = self.x - (player.x + player.width / 2)
-        if isInverted:
-            offset = (player.x + player.width / 2) - self.x
         t = offset / (player.width / 2)
-        angle = pi / 2 * t
+        if rotation:
+            t *= -1
+        angle = pi / 4 * t
         self.Vx = self.speed * sin(angle) * isInverted
         self.Vy = self.speed * cos(angle) * isInverted
         
@@ -45,11 +45,11 @@ class Ball:
             if paddle.x < self.x and self.x <= paddle.x + paddle.width and paddle.y < self.y and self.y <= paddle.y + paddle.height:
                 match i:
                     case 0:
-                        self.RetargetY(paddle, 1)
+                        self.RetargetY(paddle,  1, 0)
                     case 1:
-                        self.RetargetX(paddle, 1)
+                        self.RetargetX(paddle,  1, 0)
                     case 2:
-                        self.RetargetY(paddle, -1)
+                        self.RetargetY(paddle, -1, 1)
                     case 3:
-                        self.RetargetX(paddle, -1)
+                        self.RetargetX(paddle, -1, 1)
                         

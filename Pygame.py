@@ -8,7 +8,7 @@ pygame.init()
 fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
 
-ball = Ball(700, 360, 100)
+ball = Ball(700, 360, 500)
 paddles = [
     Paddle(650, 100, 100, 20, "Assets/paddlebleuv1.png"),
     Paddle(440, 310, 20, 100, "Assets/paddlejaunev1.png"),
