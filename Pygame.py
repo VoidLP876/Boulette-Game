@@ -8,10 +8,13 @@ fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
 
 ball = Ball(700, 360, 600)
+
 paddles = [
     Paddle(700, 100, 100, 20, "Assets/paddlebleuv1.png"),
     Paddle(700, 100, 20, 100, "Assets/paddlebleuv1.png"),
 ]
+
+
 oldTime = pygame.time.get_ticks()
 IsGameRunning = 2
 accueil = pygame.image.load("Assets/backgroundv3.png").convert()
@@ -32,29 +35,30 @@ def refresh():
     fenetre.blit(surcouche, (340,0))
     for paddle in paddles:
         paddle.draw(fenetre)
-    ball.Draw(fenetre)
+
+
 
 while IsGameRunning == 2:
     fenetre.blit(accueil, (0,0))
     fenetre.blit(playbutton,(650, 360))
-    """pos_souris = pygame.mouse.get_pos()
+    mousex, mousey = pygame.mouse.get_pos()
     bouton_souris = pygame.mouse.get_pressed()
-    if bouton_souris[2]:
-        print("test")
-        print(pos_souris)"""
-    
+    if bouton_souris[0]:
+        if 650 <= mousex <= 800 and 360 <= mousey <= 400:
+            IsGameRunning = 1
+
     pygame.display.flip()
     for event in pygame.event.get():
-        if event.type == KEYDOWN:
-            if event.key == K_SPACE :
-                IsGameRunning = 1
-        if event.type == QUIT : # ECHAP
+        #LEAVE GAME
+        if event.type == QUIT :
             IsGameRunning = 0
             pygame.quit()
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
                 pygame.quit()
+
+
 while IsGameRunning == 1:
     # deltatime
     t = pygame.time.get_ticks()
@@ -64,6 +68,7 @@ while IsGameRunning == 1:
     ball.MoveBall(deltaTime)
 
     keys_pressed = pygame.key.get_pressed()
+    
     if keys_pressed[pygame.K_LEFT]:
         paddles[0].move(deltaTime, -1, 0)
         if(paddles[0].isTouchingWallX()):
@@ -73,13 +78,16 @@ while IsGameRunning == 1:
         if(paddles[0].isTouchingWallX()):
             paddles[0].move(deltaTime, -1, 0)
 
+
+        #LEAVE GAME
     for event in pygame.event.get():
-        if event.type == QUIT : # ECHAP
+        if event.type == QUIT :
             IsGameRunning = 0
             pygame.quit()
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
                 pygame.quit()
+
 
     refresh()
