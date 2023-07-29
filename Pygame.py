@@ -33,10 +33,6 @@ fond = pygame.image.load("Assets/Nyan.PNG").convert()
 fond = pygame.transform.scale(fond, (1366, 768))
 fenetre.blit(fond, (0,0))
 pygame.display.flip()
-white = (255, 255, 255) #couleurs
-black = (0,0,0)
-grey = (128,128,128)
-clock=pygame.time.Clock()
 while IsGameRunning:
     # deltatime
     t = pygame.time.get_ticks()
