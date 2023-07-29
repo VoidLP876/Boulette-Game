@@ -20,6 +20,7 @@ while IsGameRunning:
     t = pygame.time.get_ticks()
     deltaTime = (t - oldTime) / 1000.0
     oldTime = t
+
     for event in pygame.event.get():
         if event.type == QUIT : # ECHAP
             IsGameRunning = 0
