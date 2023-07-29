@@ -4,3 +4,7 @@ class Paddle:
         self.y = y
         self.width = 20
         self.height = 100
+    
+    def move(mx, my, dt):
+        self.x += mx * dt
+        self.y += my * dt
