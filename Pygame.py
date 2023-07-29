@@ -2,11 +2,18 @@ import pygame
 from pygame.locals import *
 import time
 import random
+from Pong.paddle import *
+
 def refresh():
     pygame.display.flip
 pygame.init()
-fenetre = pygame.display.set_mode((1366,720), FULLSCREEN )
+fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
+
+paddles = [
+    Paddle(100, 100, 100, 20, "Assets/paddlebleuv1.png"),
+]
+oldTime = pygame.time.get_ticks()
 IsGameRunning = 1
 
 fond = pygame.image.load("Assets/Nyan.PNG").convert()

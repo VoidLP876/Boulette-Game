@@ -6,10 +6,12 @@ class Paddle:
         self.y = y
         self.width = w
         self.height = h
-        self.sprite = pygame.image.load("Assets/Nyan.PNG").convert()
-        self.sprite = pygame.transform.scale(self.sprite, (1400, 720))
+        self.sprite = pygame.image.load(spritePath).convert()
+        self.sprite = pygame.transform.scale(self.sprite, (w, h))
     
     def move(self, mx, my, dt):
         self.x += mx * dt
         self.y += my * dt
     
+    def draw(self, window):
+        window.blit(self.sprite, (self.x, self.y))
