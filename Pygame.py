@@ -8,6 +8,9 @@ pygame.init()
 fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
 
+points = 0
+vie = 5
+
 ball = Ball(700, 360, 500)
 paddles = [
     Paddle(650, 50, 100, 20, "Assets/paddlebleuv1.png"),
@@ -49,26 +52,33 @@ while IsGameRunning == 2:
         if 650 <= mousex <= 800 and 360 <= mousey <= 400:
             IsGameRunning = 1
 
-    pygame.display.flip()
-    for event in pygame.event.get():
-        #LEAVE GAME
-        if event.type == QUIT :
-            IsGameRunning = 0
-            pygame.quit()
-        if event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
+        pygame.display.flip()
+        for event in pygame.event.get():
+            #LEAVE GAME
+            if event.type == QUIT :
                 IsGameRunning = 0
                 pygame.quit()
-
-
-while IsGameRunning == 1:
-    # deltatime
-    t = pygame.time.get_ticks()
-    deltaTime = (t - oldTime) / 1000.0
-    oldTime = t
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    IsGameRunning = 0
+                    pygame.quit()
+    
+    if IsGameRunning == 1:
+        # deltatime
+        t = pygame.time.get_ticks()
+        deltaTime = (t - oldTime) / 1000.0
+        oldTime = t
 
     ball.CollidePaddles(paddles)
     ball.MoveBall(deltaTime)
+        points += ball.CollidePaddles(paddles)
+        dead = ball.MoveBall(deltaTime)
+        if dead > -1:
+            # paddles[dead].isAlive = False
+            vie -= 1
+        
+        if vie < 1:
+            pygame.quit()
 
     keys_pressed = pygame.key.get_pressed()
 
