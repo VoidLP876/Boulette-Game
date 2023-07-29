@@ -2,8 +2,10 @@ import pygame
 from pygame.locals import *
 import time
 import random
+from Pong.paddle import Paddle
+
 def refresh():
-    pygame.display.flip
+    pygame.display.flip()
 pygame.init()
 fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
