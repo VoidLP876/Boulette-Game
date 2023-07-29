@@ -26,8 +26,10 @@ fond = pygame.image.load("Assets/backgroundv1.png").convert()
 fond = pygame.transform.scale(fond, (ScreenWidth,ScreenHeight))
 surcouche = pygame.image.load("Assets/backgroundcarrev1.png").convert()
 fenetre.blit(fond, (0,0))
-pygame.mixer.music.load('Assets/music.mp3')
 
+music1 =pygame.mixer.Sound('Assets/music.mp3')
+
+music1.play()
 pygame.display.flip()
 
 def refresh():
