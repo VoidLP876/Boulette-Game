@@ -24,6 +24,7 @@ pygame.mixer.music.load('Assets/music.mp3')
 
 pygame.display.flip()
 
+
 def refresh():
     pygame.display.flip()
 
@@ -31,6 +32,9 @@ def refresh():
     fenetre.blit(surcouche, (340,0))
     for paddle in paddles:
         paddle.draw(fenetre)
+
+
+
 while IsGameRunning == 2:
     fenetre.blit(accueil, (0,0))
     fenetre.blit(playbutton,(650, 360))
@@ -45,13 +49,18 @@ while IsGameRunning == 2:
         if event.type == KEYDOWN:
             if event.key == K_SPACE :
                 IsGameRunning = 1
-        if event.type == QUIT : # ECHAP
+            
+        #LEAVE GAME
+        if event.type == QUIT :
             IsGameRunning = 0
             pygame.quit()
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
                 pygame.quit()
+
+
+
 while IsGameRunning == 1:
     
     # deltatime
@@ -69,8 +78,9 @@ while IsGameRunning == 1:
         if(paddles[0].isTouchingWallX()):
             paddles[0].move(deltaTime, -1, 0)
 
+        #LEAVE GAME
     for event in pygame.event.get():
-        if event.type == QUIT : # ECHAP
+        if event.type == QUIT :
             IsGameRunning = 0
             pygame.quit()
         if event.type == KEYDOWN:
