@@ -39,18 +39,14 @@ def refresh():
 while IsGameRunning == 2:
     fenetre.blit(accueil, (0,0))
     fenetre.blit(playbutton,(650, 360))
-    """pos_souris = pygame.mouse.get_pos()
+    mousex, mousey = pygame.mouse.get_pos()
     bouton_souris = pygame.mouse.get_pressed()
-    if bouton_souris[2]:
-        print("test")
-        print(pos_souris)"""
-    
+    if bouton_souris[0]:
+        if 650 <= mousex <= 800 and 360 <= mousey <= 400:
+            IsGameRunning = 1
+
     pygame.display.flip()
     for event in pygame.event.get():
-        if event.type == KEYDOWN:
-            if event.key == K_SPACE :
-                IsGameRunning = 1
-            
         #LEAVE GAME
         if event.type == QUIT :
             IsGameRunning = 0
@@ -59,7 +55,6 @@ while IsGameRunning == 2:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
                 pygame.quit()
-
 
 
 while IsGameRunning == 1:
@@ -80,6 +75,7 @@ while IsGameRunning == 1:
         if(paddles[0].isTouchingWallX()):
             paddles[0].move(deltaTime, -1, 0)
 
+
         #LEAVE GAME
     for event in pygame.event.get():
         if event.type == QUIT :
@@ -89,5 +85,6 @@ while IsGameRunning == 1:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
                 pygame.quit()
+
 
     refresh()
