@@ -8,7 +8,7 @@ pygame.init()
 fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
 
-ball = Ball(700, 360, 500)
+ball = Ball(700, 360, 100)
 paddles = [
     Paddle(650, 100, 100, 20, "Assets/paddlebleuv1.png"),
     Paddle(440, 310, 20, 100, "Assets/paddlejaunev1.png"),
@@ -31,12 +31,11 @@ pygame.mixer.music.load('Assets/music.mp3')
 pygame.display.flip()
 
 def refresh():
-    pygame.display.flip()
-
     fenetre.blit(fond, (0,0))
     fenetre.blit(surcouche, (340,0))
     for paddle in paddles:
         paddle.draw(fenetre)
+    ball.Draw(fenetre)
 
 while IsGameRunning == 2:
     fenetre.blit(accueil, (0,0))
@@ -96,3 +95,5 @@ while IsGameRunning == 1:
                 
 
     refresh()
+    
+    pygame.display.flip()
