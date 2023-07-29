@@ -11,7 +11,7 @@ fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
 
 paddles = [
-    Paddle(100, 100, 100, 20, "Assets/paddlebleuv1.png"),
+    Paddle(700, 100, 100, 20, "Assets/paddlebleuv1.png"),
 ]
 oldTime = pygame.time.get_ticks()
 IsGameRunning = 1
@@ -27,8 +27,6 @@ pygame.mixer.music.play(-1, 0.0)
 
 pygame.display.flip()
 
-oldTime = 0
-
 while IsGameRunning:
     randomevent = random.randint (0,5000)
     if randomevent == 5000:
@@ -40,12 +38,17 @@ while IsGameRunning:
 
     fenetre.blit(fond, (0,0))
 
-    for paddle in paddles:
-        paddle.move(deltaTime)
+    keys_pressed = pygame.key.get_pressed()
+    if keys_pressed[pygame.K_LEFT]:
+        paddle.move(deltaTime, -1, 0)
         if(paddle.isTouchingWallX()):
-            paddle.move(100, 0, deltaTime)
-        if(paddle.isTouchingWallY()):
-            paddle.move(100, 0, deltaTime)
+            paddle.move(deltaTime, 1, 0)
+    if keys_pressed[pygame.K_RIGHT]:
+        paddle.move(deltaTime, 1, 0)
+        if(paddle.isTouchingWallX()):
+            paddle.move(deltaTime, -1, 0)
+    
+    for paddle in paddles:
         paddle.draw(fenetre)
 
     for event in pygame.event.get():
@@ -54,17 +57,7 @@ while IsGameRunning:
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
-    keys_pressed = pygame.key.get_pressed()
-    if keys_pressed[pygame.K_LEFT]:
-        if xpos >= 340:
-            xpos -= 1  
-            time.sleep(0.002)
-            refresh()
-    if keys_pressed[pygame.K_RIGHT]:
-        if xpos + 100 <= 1060:
-            xpos += 1
-            time.sleep(0.002)
-            refresh()
-    
+
+    refresh()
 
         
