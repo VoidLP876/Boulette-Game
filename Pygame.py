@@ -39,92 +39,92 @@ def refresh():
         paddle.draw(fenetre)
     ball.Draw(fenetre)
 
-while IsGameRunning == 2:
-    fenetre.blit(accueil, (0,0))
-    fenetre.blit(playbutton,(650, 360))
-    
-    mousex, mousey = pygame.mouse.get_pos()
-    bouton_souris = pygame.mouse.get_pressed()
-    if bouton_souris[0]:
-        if 650 <= mousex <= 800 and 360 <= mousey <= 400:
-            IsGameRunning = 1
+while IsGameRunning > 0:
+    if IsGameRunning == 2:
+        fenetre.blit(accueil, (0,0))
+        fenetre.blit(playbutton,(650, 360))
 
-    pygame.display.flip()
-    for event in pygame.event.get():
-        #LEAVE GAME
-        if event.type == QUIT :
-            IsGameRunning = 0
-            pygame.quit()
-        if event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
+        mousex, mousey = pygame.mouse.get_pos()
+        bouton_souris = pygame.mouse.get_pressed()
+        if bouton_souris[0]:
+            if 650 <= mousex <= 800 and 360 <= mousey <= 400:
+                IsGameRunning = 1
+
+        pygame.display.flip()
+        for event in pygame.event.get():
+            #LEAVE GAME
+            if event.type == QUIT :
                 IsGameRunning = 0
                 pygame.quit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    IsGameRunning = 0
+                    pygame.quit()
+    
+    if IsGameRunning == 1:
+        # deltatime
+        t = pygame.time.get_ticks()
+        deltaTime = (t - oldTime) / 1000.0
+        oldTime = t
 
+        ball.CollidePaddles(paddles)
+        dead = ball.MoveBall(deltaTime)
+        if dead > -1:
+            paddles[dead].isAlive = False
 
-while IsGameRunning == 1:
-    # deltatime
-    t = pygame.time.get_ticks()
-    deltaTime = (t - oldTime) / 1000.0
-    oldTime = t
+        keys_pressed = pygame.key.get_pressed()
 
-    ball.CollidePaddles(paddles)
-    ball.MoveBall(deltaTime)
-
-    keys_pressed = pygame.key.get_pressed()
-
-
-    #J1 BLEU
-
-    if keys_pressed[pygame.K_w]:
-        paddles[0].move(deltaTime, -1, 0)
-        if(paddles[0].isTouchingWallX()):
-            paddles[0].move(deltaTime, 1, 0)
-    if keys_pressed[pygame.K_x]:
-        paddles[0].move(deltaTime, 1, 0)
-        if(paddles[0].isTouchingWallX()):
+        #J1 BLEU
+        if keys_pressed[pygame.K_w]:
             paddles[0].move(deltaTime, -1, 0)
+            if(paddles[0].isTouchingWallX()):
+                paddles[0].move(deltaTime, 1, 0)
+        if keys_pressed[pygame.K_x]:
+            paddles[0].move(deltaTime, 1, 0)
+            if(paddles[0].isTouchingWallX()):
+                paddles[0].move(deltaTime, -1, 0)
 
-    #J2 JAUNE
-    if keys_pressed[pygame.K_a]:
-        paddles[1].move(deltaTime, -1, 1)
-        if(paddles[1].isTouchingWallY()):
-            paddles[1].move(deltaTime, 1, 1)
-    if keys_pressed[pygame.K_q]:
-        paddles[1].move(deltaTime, 1, 1)
-        if(paddles[1].isTouchingWallY()):
+        #J2 JAUNE
+        if keys_pressed[pygame.K_a]:
             paddles[1].move(deltaTime, -1, 1)
+            if(paddles[1].isTouchingWallY()):
+                paddles[1].move(deltaTime, 1, 1)
+        if keys_pressed[pygame.K_q]:
+            paddles[1].move(deltaTime, 1, 1)
+            if(paddles[1].isTouchingWallY()):
+                paddles[1].move(deltaTime, -1, 1)
 
-    #J3 ROUGE
-    if keys_pressed[pygame.K_LEFT]:
-        paddles[2].move(deltaTime, -1, 0)
-        if(paddles[2].isTouchingWallX()):
-            paddles[2].move(deltaTime, 1, 0)
-    if keys_pressed[pygame.K_DOWN]:
-        paddles[2].move(deltaTime, 1, 0)
-        if(paddles[2].isTouchingWallX()):
+        #J3 ROUGE
+        if keys_pressed[pygame.K_LEFT]:
             paddles[2].move(deltaTime, -1, 0)
+            if(paddles[2].isTouchingWallX()):
+                paddles[2].move(deltaTime, 1, 0)
+        if keys_pressed[pygame.K_DOWN]:
+            paddles[2].move(deltaTime, 1, 0)
+            if(paddles[2].isTouchingWallX()):
+                paddles[2].move(deltaTime, -1, 0)
 
-    #J4 VERT
-    if keys_pressed[pygame.K_KP9]:
-        paddles[3].move(deltaTime, -1, 1)
-        if(paddles[3].isTouchingWallY()):
-            paddles[3].move(deltaTime, 1, 1)
-    if keys_pressed[pygame.K_KP6]:
-        paddles[3].move(deltaTime, 1, 1)
-        if(paddles[3].isTouchingWallY()):
+        #J4 VERT
+        if keys_pressed[pygame.K_KP9]:
             paddles[3].move(deltaTime, -1, 1)
+            if(paddles[3].isTouchingWallY()):
+                paddles[3].move(deltaTime, 1, 1)
+        if keys_pressed[pygame.K_KP6]:
+            paddles[3].move(deltaTime, 1, 1)
+            if(paddles[3].isTouchingWallY()):
+                paddles[3].move(deltaTime, -1, 1)
 
-        #LEAVE GAME
-    for event in pygame.event.get():
-        if event.type == QUIT :
-            IsGameRunning = 0
-            pygame.quit()
-        if event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
+            #LEAVE GAME
+        for event in pygame.event.get():
+            if event.type == QUIT :
                 IsGameRunning = 0
                 pygame.quit()
-                
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    IsGameRunning = 0
+                    pygame.quit()
 
-    refresh()
-    
-    pygame.display.flip()
+
+        refresh()
+
+        pygame.display.flip()

@@ -17,12 +17,23 @@ class Ball:
     def MoveBall(self, dt):
         self.x += self.Vx * dt
         self.y += self.Vy * dt
-        if self.x > 1060 or self.x < 340:
+        if self.x < 340:
             self.Vx *= -1
             self.x += self.Vx * dt
-        if self.y > 720 or self.y < 0:
+            return 1
+        if self.x > 1060:
+            self.Vx *= -1
+            self.x += self.Vx * dt
+            return 3
+        if self.y < 0:
             self.Vy *= -1
             self.y += self.Vy * dt
+            return 0
+        if self.y > 720:
+            self.Vy *= -1
+            self.y += self.Vy * dt
+            return 2
+        return -1
 
     def RetargetX(self, player, isInverted, rotation):
         offset = self.y - (player.y + player.height / 2)
