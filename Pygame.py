@@ -12,10 +12,12 @@ paddles = [
     Paddle(700, 100, 100, 20, "Assets/paddlebleuv1.png"),
 ]
 oldTime = pygame.time.get_ticks()
-IsGameRunning = 1
-fond = pygame.image.load("Assets/Nyan.PNG").convert()
+IsGameRunning = 2
+accueil = pygame.image.load("Assets/Nyan.png").convert()
+accueil = pygame.transform.scale(accueil, (ScreenWidth,ScreenHeight))
+fond = pygame.image.load("Assets/backgroundv1.png").convert()
 fond = pygame.transform.scale(fond, (ScreenWidth,ScreenHeight))
-
+surcouche = pygame.image.load("Assets/backgroundcarrev1.png").convert()
 fenetre.blit(fond, (0,0))
 pygame.mixer.music.load('Assets/music.mp3')
 
@@ -25,11 +27,18 @@ def refresh():
     pygame.display.flip()
 
     fenetre.blit(fond, (0,0))
-    
+    fenetre.blit(surcouche, (340,0))
     for paddle in paddles:
         paddle.draw(fenetre)
-
-while IsGameRunning:
+while IsGameRunning == 2:
+    fenetre.blit(accueil, (0,0))
+    pygame.display.flip()
+    for event in pygame.event.get():
+        if event.type == KEYDOWN:
+            if event.key == K_SPACE :
+                IsGameRunning = 1
+while IsGameRunning == 1:
+    
     # deltatime
     t = pygame.time.get_ticks()
     deltaTime = (t - oldTime) / 1000.0
@@ -48,9 +57,11 @@ while IsGameRunning:
     for event in pygame.event.get():
         if event.type == QUIT : # ECHAP
             IsGameRunning = 0
+            pygame.quit()
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
+                pygame.quit()
 
     refresh()
 
