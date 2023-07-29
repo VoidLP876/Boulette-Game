@@ -27,8 +27,6 @@ while IsGameRunning:
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
-<<<<<<< HEAD
-=======
     keys_pressed = pygame.key.get_pressed()
     if keys_pressed[pygame.K_LEFT]:
         if xpos >= 340:
@@ -39,6 +37,5 @@ while IsGameRunning:
             xpos += 1
             time.sleep(0.002)
     
->>>>>>> a9ce60bd58e90a91ac6a76efe96c7f1fce0dc324
 
         
