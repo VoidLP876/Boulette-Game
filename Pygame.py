@@ -20,4 +20,4 @@ while IsGameRunning:
         windowsize = [w, h]
     for event in pygame.event.get():
         if event.type == QUIT :
-            IsGameRunning = 0 
+            IsGameRunning = 0
