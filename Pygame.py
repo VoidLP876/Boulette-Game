@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 from Pong.Ball import *
 from Pong.paddle import Paddle
+import time
 
 pygame.init()
 fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
@@ -37,11 +38,10 @@ def refresh():
     for paddle in paddles:
         paddle.draw(fenetre)
 
-
-
 while IsGameRunning == 2:
     fenetre.blit(accueil, (0,0))
     fenetre.blit(playbutton,(650, 360))
+    
     mousex, mousey = pygame.mouse.get_pos()
     bouton_souris = pygame.mouse.get_pressed()
     if bouton_souris[0]:
@@ -70,7 +70,10 @@ while IsGameRunning == 1:
     ball.MoveBall(deltaTime)
 
     keys_pressed = pygame.key.get_pressed()
-    
+
+
+    #JOUEUR 1
+
     if keys_pressed[pygame.K_LEFT]:
         paddles[0].move(deltaTime, -1, 0)
         if(paddles[0].isTouchingWallX()):
@@ -90,6 +93,6 @@ while IsGameRunning == 1:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
                 pygame.quit()
-
+                
 
     refresh()
