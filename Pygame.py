@@ -22,7 +22,7 @@ paddles = [
 
 oldTime = pygame.time.get_ticks()
 IsGameRunning = 2
-accueil = pygame.image.load("Assets/backgroundv3.png").convert()
+accueil = pygame.image.load("Assets/backgroundv4.png").convert()
 accueil = pygame.transform.scale(accueil, (ScreenWidth,ScreenHeight))
 playbutton = pygame.image.load("Assets/Play.png").convert_alpha()
 fond = pygame.image.load("Assets/backgroundv1.png").convert()
@@ -71,8 +71,6 @@ while IsGameRunning > 0:
                     pygame.quit()
     
     if IsGameRunning == 1:
-
-
         # deltatime
         t = pygame.time.get_ticks()
         deltaTime = (t - oldTime) / 1000.0
@@ -89,7 +87,9 @@ while IsGameRunning > 0:
 
         keys_pressed = pygame.key.get_pressed()
 
+
         #J1 BLEU
+
         if keys_pressed[pygame.K_w]:
             paddles[0].move(deltaTime, -1, 0)
             if(paddles[0].isTouchingWallX()):
