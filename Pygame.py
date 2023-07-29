@@ -8,11 +8,12 @@ pygame.init()
 fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
 
-ball = Ball(700, 360, 600)
-
+ball = Ball(700, 360, 500)
 paddles = [
-    Paddle(700, 100, 100, 20, "Assets/paddlebleuv1.png"),
-    Paddle(700, 100, 20, 100, "Assets/paddlebleuv1.png"),
+    Paddle(650, 100, 100, 20, "Assets/paddlebleuv1.png"),
+    Paddle(440, 310, 20, 100, "Assets/paddlejaunev1.png"),
+    Paddle(650, 620, 100, 20, "Assets/paddlerougev1.png"),
+    Paddle(960, 310, 20, 100, "Assets/paddlevertv1.png"),
 ]
 
 
@@ -65,6 +66,7 @@ while IsGameRunning == 1:
     deltaTime = (t - oldTime) / 1000.0
     oldTime = t
 
+    ball.CollidePaddles(paddles)
     ball.MoveBall(deltaTime)
 
     keys_pressed = pygame.key.get_pressed()
