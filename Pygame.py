@@ -15,6 +15,7 @@ oldTime = pygame.time.get_ticks()
 IsGameRunning = 2
 accueil = pygame.image.load("Assets/Nyan.png").convert()
 accueil = pygame.transform.scale(accueil, (ScreenWidth,ScreenHeight))
+playbutton = pygame.image.load("Assets/Play.png")
 fond = pygame.image.load("Assets/backgroundv1.png").convert()
 fond = pygame.transform.scale(fond, (ScreenWidth,ScreenHeight))
 surcouche = pygame.image.load("Assets/backgroundcarrev1.png").convert()
