@@ -10,8 +10,8 @@ class Paddle:
         self.sprite = pygame.transform.scale(self.sprite, (w, h))
 
     def move(self, dt, direction, isRotated):
-        self.x += (direction * isRotated * 100) * dt 
-        self.y += (direction * (not isRotated) * 100) * dt 
+        self.x += (direction * (not isRotated) * 1000) * dt 
+        self.y += (direction * isRotated * 1000) * dt 
     
     def draw(self, window):
         window.blit(self.sprite, (self.x, self.y))
