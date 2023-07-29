@@ -34,6 +34,7 @@ music1 =pygame.mixer.Sound('Assets/music.mp3')
 
 music1.play()
 pygame.display.flip()
+font = pygame.font.SysFont("monospace", 40)
 
 def refresh():
     fenetre.blit(fond, (0,0))
@@ -41,6 +42,11 @@ def refresh():
     for paddle in paddles:
         paddle.draw(fenetre)
     ball.Draw(fenetre)
+
+    label1 = font.render("Vie : {}".format(vie), 1, (255, 255, 255))
+    fenetre.blit(label1, (100, 100))
+    label2 = font.render("Points : {}".format(points), 1, (255, 255, 255))
+    fenetre.blit(label2, (100, 200))
 
 while IsGameRunning > 0:
     if IsGameRunning == 2:
@@ -65,6 +71,8 @@ while IsGameRunning > 0:
                     pygame.quit()
     
     if IsGameRunning == 1:
+
+
         # deltatime
         t = pygame.time.get_ticks()
         deltaTime = (t - oldTime) / 1000.0
