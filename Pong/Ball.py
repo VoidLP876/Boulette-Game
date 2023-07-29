@@ -1,6 +1,7 @@
 from math import sin, cos, pow, sqrt, radians, pi
 import pygame
-
+pygame.init()
+effect =pygame.mixer.Sound('Assets/boing.mp3')
 class Ball:
     def __init__(self, X, Y, speed):#sprite):
         self.r = 0
@@ -57,6 +58,7 @@ class Ball:
         returnTrue = False
         for i, paddle in enumerate(paddles):
             if paddle.x < self.x and self.x <= paddle.x + paddle.width and paddle.y < self.y and self.y <= paddle.y + paddle.height:
+                effect.play()
                 
                 returnTrue = True
                 match i:
