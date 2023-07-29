@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 import time
 import random
 test = random.randint(0,180) 
@@ -10,5 +11,3 @@ fond = pygame.image.load("Nyan.PNG").convert()
 fenetre.blit(fond, (0,0))
 while True: 
     print (test)
-
-# j'ai fait un commentaire lol
