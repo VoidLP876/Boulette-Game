@@ -8,6 +8,7 @@ class Ball:
         self.dir = dir
         self.Vx = Vx
         self.Vy = Vy
-        d = screen.get_width() pow(screen.get_height()-self.y,2)
         self.sprite = sprite
+        d = screen.get_width() pow(screen.get_height()-self.y,2)
+
         self.Target = Vector2(d)
