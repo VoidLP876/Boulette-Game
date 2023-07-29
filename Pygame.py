@@ -4,8 +4,6 @@ import time
 import random
 from Pong.paddle import Paddle
 
-def refresh():
-    pygame.display.flip()
 pygame.init()
 fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
@@ -23,26 +21,29 @@ pygame.mixer.music.load('Assets/music.mp3')
 
 pygame.display.flip()
 
+def refresh():
+    pygame.display.flip()
+
+    fenetre.blit(fond, (0,0))
+    
+    for paddle in paddles:
+        paddle.draw(fenetre)
+
 while IsGameRunning:
     # deltatime
     t = pygame.time.get_ticks()
     deltaTime = (t - oldTime) / 1000.0
     oldTime = t
 
-    fenetre.blit(fond, (0,0))
-
     keys_pressed = pygame.key.get_pressed()
     if keys_pressed[pygame.K_LEFT]:
-        paddle.move(deltaTime, -1, 0)
-        if(paddle.isTouchingWallX()):
-            paddle.move(deltaTime, 1, 0)
+        paddles[0].move(deltaTime, -1, 0)
+        if(paddles[0].isTouchingWallX()):
+            paddles[0].move(deltaTime, 1, 0)
     if keys_pressed[pygame.K_RIGHT]:
-        paddle.move(deltaTime, 1, 0)
-        if(paddle.isTouchingWallX()):
-            paddle.move(deltaTime, -1, 0)
-    
-    for paddle in paddles:
-        paddle.draw(fenetre)
+        paddles[0].move(deltaTime, 1, 0)
+        if(paddles[0].isTouchingWallX()):
+            paddles[0].move(deltaTime, -1, 0)
 
     for event in pygame.event.get():
         if event.type == QUIT : # ECHAP
