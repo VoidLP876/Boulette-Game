@@ -10,3 +10,5 @@ fond = pygame.image.load("Nyan.PNG").convert()
 fenetre.blit(fond, (0,0))
 while True: 
     print (test)
+
+# j'ai fait un commentaire lol
