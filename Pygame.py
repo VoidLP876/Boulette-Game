@@ -2,10 +2,8 @@ import pygame
 from pygame.locals import *
 import time
 import random
-from Pong.paddle import *
-
 def refresh():
-    pygame.display.flip()
+    pygame.display.flip
 pygame.init()
 fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
@@ -15,22 +13,15 @@ paddles = [
 ]
 oldTime = pygame.time.get_ticks()
 IsGameRunning = 1
-
-paddle = pygame.image.load("Assets/paddlebleuv1.png")
-paddle = pygame.transform.scale (paddle, (100,20))
-
 fond = pygame.image.load("Assets/Nyan.PNG").convert()
 fond = pygame.transform.scale(fond, (ScreenWidth,ScreenHeight))
 
+fenetre.blit(fond, (0,0))
 pygame.mixer.music.load('Assets/music.mp3')
-pygame.mixer.music.play(-1, 0.0)
 
 pygame.display.flip()
 
 while IsGameRunning:
-    randomevent = random.randint (0,5000)
-    if randomevent == 5000:
-        randomeffect = 1
     # deltatime
     t = pygame.time.get_ticks()
     deltaTime = (t - oldTime) / 1000.0
