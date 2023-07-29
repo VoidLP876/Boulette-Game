@@ -1,7 +1,6 @@
 import pygame
 pygame.init()
-largeur, hauteur = 500, 500
-ecran = pygame.display.set_mode(((640,480), pygame.FULLSCREEN)
+ecran = pygame.display.set_mode((1366, 768), pygame.FULLSCREEN)
 pygame.display.set_caption("Fenêtre")
 
 running = True
