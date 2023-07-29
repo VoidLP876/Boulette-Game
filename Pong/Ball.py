@@ -1,45 +1,55 @@
 from math import sin, cos, pow, sqrt, radians, pi
 import pygame
-from paddle import Paddle
 
 class Ball:
     def __init__(self, X, Y, speed):#sprite):
         self.r = 0
         self.x = X
         self.y = Y
+        self.speed = speed
         self.Vx = 0
         self.Vy = speed
         #self.sprite = sprite
     def Draw(self, screen):
         pygame.draw.circle(screen, "white", (self.x, self.y), 5)
-    def MoveBall(self, dt, player):
+    def MoveBall(self, dt):
         self.x += self.Vx * dt
         self.y += self.Vy * dt
         if self.x > 1060 or self.x < 340:
             self.Vx *= -1
-        if self.y > 800 or self.y < 0:
+            self.x += self.Vx * dt
+        if self.y > 720 or self.y < 0:
             self.Vy *= -1
-    def RetargetX(self, player):
-        player_interesected_ball, player = detect_collision(self, player) #It's a function that just detects if two rectangles collided
-        if player_interesected_ball :
-            if player.rotate:
-                self.RetargetY(player)
-            else:
-                self.RetargetX(player)
-    def RetargetX(self, player):
-        offset = (self.x + 5 - player.x) 
-        player.width + 5
-        phi = 0.25 * pi * (2 * offset - 1)
-        self.Vx = self.speed * sin(phi)
-        self.Vy *= -1 
+            self.y += self.Vy * dt
 
-    def RetargetY(self, player):
-        offset = (self.y + 5 - player.y) 
-        player.height + 5
-        phi = 0.25 * pi * (2 * offset - 1)
-        self.Vx *= -1 
-        self.Vy = self.speed * sin(phi)
+    def RetargetX(self, player, isInverted):
+        offset = self.y - (player.y + player.height / 2)
+        if isInverted:
+            offset = (player.y + player.height / 2) - self.y
+        t = offset / (player.height / 2)
+        angle = pi / 2 * t
+        self.Vx = self.speed * cos(angle) * isInverted
+        self.Vy = self.speed * sin(angle) * isInverted
+
+    def RetargetY(self, player, isInverted):
+        offset = self.x - (player.x + player.width / 2)
+        if isInverted:
+            offset = (player.x + player.width / 2) - self.x
+        t = offset / (player.width / 2)
+        angle = pi / 2 * t
+        self.Vx = self.speed * sin(angle) * isInverted
+        self.Vy = self.speed * cos(angle) * isInverted
+        
     def CollidePaddles(self, paddles):
         for i, paddle in enumerate(paddles):
-            if paddle.x > self.x and self.x <= paddle.x + paddle.width and paddle.y > self.y and self.y <= paddle.y + paddle.height:
-                
+            if paddle.x < self.x and self.x <= paddle.x + paddle.width and paddle.y < self.y and self.y <= paddle.y + paddle.height:
+                match i:
+                    case 0:
+                        self.RetargetY(paddle, 1)
+                    case 1:
+                        self.RetargetX(paddle, 1)
+                    case 2:
+                        self.RetargetY(paddle, -1)
+                    case 3:
+                        self.RetargetX(paddle, -1)
+                        
