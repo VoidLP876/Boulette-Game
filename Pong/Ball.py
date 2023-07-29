@@ -9,9 +9,11 @@ class Ball:
         self.speed = speed
         self.Vx = 0
         self.Vy = speed
-        #self.sprite = sprite
-    def Draw(self, screen):
-        pygame.draw.circle(screen, "white", (self.x, self.y), 5)
+        self.sprite = pygame.image.load("Assets/boulettev3.png").convert_alpha()
+        self.sprite = pygame.transform.scale(self.sprite, (50, 50))
+    def Draw(self, window):
+        # pygame.draw.circle(screen, "white", (self.x, self.y), 5)
+        window.blit(self.sprite, (self.x - 25, self.y - 25))
     def MoveBall(self, dt):
         self.x += self.Vx * dt
         self.y += self.Vy * dt
