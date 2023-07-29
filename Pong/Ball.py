@@ -2,7 +2,7 @@ from math import sin, cos, pow, sqrt, radians, pi
 import pygame
 
 class Ball:
-    def __init__(self, X, Y,dir):#sprite):
+    def __init__(self, X, Y, speed):#sprite):
         self.r = 0
         self.x = X
         self.y = Y
