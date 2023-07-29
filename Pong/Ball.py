@@ -1,18 +1,22 @@
-from math import sin, cos, tan, pow, sqrt, radians
-from pygame import Vector2
+from math import sin, cos, pow, sqrt, radians
+import pygame
 class Ball:
-    def __init__(self, screen, X, Y,dir,sprite):
+    def __init__(self, X, Y,dir):#sprite):
         self.r = 0
         self.x = X
         self.y = Y
-        self.Vx = cos(radians(dir)) *(sqrt(pow(screen.get_width(),2)-pow(screen.get_height(),2)))/self.speed
-        self.Vy = sin(radians(dir)) *(sqrt(pow(screen.get_width(),2)-pow(screen.get_height(),2)))/self.speed
+        self.speed = 750
+        self.Vx = cos(radians(dir)) *(sqrt(pow(720,2)+pow(720,2)))/self.speed
+        self.Vy = sin(radians(dir)) *(sqrt(pow(720,2)+pow(720,2)))/self.speed
         self.dir = dir
-        self.sprite = sprite
-        self.speed = 60
-    def ChangeTarget(self, screen):
-       self.Vx = cos(radians(self.dir)) *(sqrt(pow(screen.get_width(),2)-pow(screen.get_height(),2)))/self.speed
-       self.Vy = sin(radians(self.dir)) *(sqrt(pow(screen.get_width(),2)-pow(screen.get_height(),2)))/self.speed
+        #self.sprite = sprite
+    def Draw(self, screen):
+        pygame.draw.circle(screen, "white", (self.x, self.y), 5)
     def MoveBall(self):
         self.x += self.Vx
         self.y += self.Vy
+        if self.x > 1060 or self.x < 340:
+            self.Vx *= -1
+        if self.y > 1060 and self.y < 340:
+            self.Vy *= -1
+        
