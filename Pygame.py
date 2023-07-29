@@ -14,7 +14,7 @@ fond = pygame.transform.scale(fond, (ScreenWidth,ScreenHeight))
 
 fenetre.blit(fond, (0,0))
 pygame.mixer.music.load('Assets/music.mp3')
-
+pygame.mixer.music.play(-1, 0.0)
 pygame.display.flip()
 while IsGameRunning:
     # deltatime
