@@ -15,3 +15,4 @@ while IsGameRunning:
     for event in pygame.event.get():
         if event.type == QUIT :
             IsGameRunning = 0
+# moi aussi !
