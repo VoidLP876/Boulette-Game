@@ -1,11 +1,8 @@
 import pygame
 import time
 import random
-test = 0
-def randomgenerator():
-    test = random.randint(0,180) 
-    return test
-
+test = random.randint(0,180) 
+pygame.init()
+fenetre = pygame.display.set_mode((640,480), RESIZABLE)
 while True: 
-    randomgenerator()
     print (test)
