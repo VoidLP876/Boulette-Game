@@ -19,7 +19,7 @@ paddles = [
 
 oldTime = pygame.time.get_ticks()
 IsGameRunning = 2
-accueil = pygame.image.load("Assets/backgroundv3.png").convert()
+accueil = pygame.image.load("Assets/backgroundv4.png").convert()
 accueil = pygame.transform.scale(accueil, (ScreenWidth,ScreenHeight))
 playbutton = pygame.image.load("Assets/Play.png").convert_alpha()
 fond = pygame.image.load("Assets/backgroundv1.png").convert()
