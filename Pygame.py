@@ -8,6 +8,9 @@ pygame.init()
 fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
 ScreenWidth, ScreenHeight = fenetre.get_size()
 
+points = 0
+vie = 5
+
 ball = Ball(700, 360, 500)
 paddles = [
     Paddle(650, 50, 100, 20, "Assets/paddlebleuv1.png"),
@@ -65,10 +68,14 @@ while IsGameRunning > 0:
         deltaTime = (t - oldTime) / 1000.0
         oldTime = t
 
-        ball.CollidePaddles(paddles)
+        points += ball.CollidePaddles(paddles)
         dead = ball.MoveBall(deltaTime)
         if dead > -1:
-            paddles[dead].isAlive = False
+            # paddles[dead].isAlive = False
+            vie -= 1
+        
+        if vie < 1:
+            pygame.quit()
 
         keys_pressed = pygame.key.get_pressed()
 

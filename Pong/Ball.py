@@ -54,8 +54,11 @@ class Ball:
         self.Vy = self.speed * cos(angle) * isInverted
         
     def CollidePaddles(self, paddles):
+        returnTrue = False
         for i, paddle in enumerate(paddles):
             if paddle.x < self.x and self.x <= paddle.x + paddle.width and paddle.y < self.y and self.y <= paddle.y + paddle.height:
+                
+                returnTrue = True
                 match i:
                     case 0:
                         self.RetargetY(paddle,  1, 0)
@@ -65,4 +68,5 @@ class Ball:
                         self.RetargetY(paddle, -1, 1)
                     case 3:
                         self.RetargetX(paddle, -1, 1)
-                        
+        
+        return returnTrue
