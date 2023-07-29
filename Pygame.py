@@ -33,12 +33,19 @@ def refresh():
         paddle.draw(fenetre)
 while IsGameRunning == 2:
     fenetre.blit(accueil, (0,0))
-    fenetre.blit(playbutton,(500, 500))
+    fenetre.blit(playbutton,(650, 360))
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             if event.key == K_SPACE :
                 IsGameRunning = 1
+        if event.type == QUIT : # ECHAP
+            IsGameRunning = 0
+            pygame.quit()
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                IsGameRunning = 0
+                pygame.quit()
 while IsGameRunning == 1:
     
     # deltatime
