@@ -59,12 +59,10 @@ while IsGameRunning:
         if xpos >= 340:
             xpos -= 1  
             time.sleep(0.002)
-            refresh()
     if keys_pressed[pygame.K_RIGHT]:
         if xpos + 100 <= 1060:
             xpos += 1
             time.sleep(0.002)
-            refresh()
     
 
         
