@@ -12,27 +12,30 @@ class Ball:
         #self.sprite = sprite
     def Draw(self, screen):
         pygame.draw.circle(screen, "white", (self.x, self.y), 5)
-    def MoveBall(self):
+    def MoveBall(self, player):
         self.x += self.Vx
         self.y += self.Vy
         if self.x > 1060 or self.x < 340:
             self.Vx *= -1
         if self.y > 1060 and self.y < 340:
-            self.Vy *= -1
+            self.Vy *= -1  
+        player_interesected_ball, player = detectCollision(self, player)
+        if player_interesected_ball :
+            if player.rotate:
+                self.RetargetY(player)
+            else:
+                self.RetargetX(player)
     def RetargetX(self, player):
-        player_interesected_ball = detect_collision(self, player) #It's a function that just detects if two rectangles collided
-        if player_interesected_ball :
-            offset = (self.x + 5 - player.x) / \
-            (player.width + 5) 
-            phi = 0.25 * pi * (2 * offset - 1)
-            self.Vx = self.speed * sin(phi)
-            self.Vy *= -1 
+        offset = (self.x + 5 - player.x) 
+        player.width + 5
+        phi = 0.25 * pi * (2 * offset - 1)
+        self.Vx = self.speed * sin(phi)
+        self.Vy *= -1 
+
     def RetargetY(self, player):
-        player_interesected_ball = detect_collision(self, player) #It's a function that just detects if two rectangles collided
-        if player_interesected_ball :
-            offset = (self.y + 5 - player.y) / \
-            (player.height + 5) 
-            phi = 0.25 * pi * (2 * offset - 1)
-            self.Vx *= -1 
-            self.Vy = self.speed * sin(phi)
+        offset = (self.y + 5 - player.y) 
+        player.height + 5
+        phi = 0.25 * pi * (2 * offset - 1)
+        self.Vx *= -1 
+        self.Vy = self.speed * sin(phi)
                 
