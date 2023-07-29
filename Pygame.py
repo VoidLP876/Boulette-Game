@@ -2,11 +2,16 @@ import pygame
 from pygame.locals import *
 import time
 import random
-def refresh():
-    pygame.display.flip
+from Pong.paddle import Paddle
+
 pygame.init()
-fenetre = pygame.display.set_mode((1400, 720), FULLSCREEN )
-ScreenWidth, ScreenHeigh = fenetre.get_size()
+fenetre = pygame.display.set_mode((1400,720), FULLSCREEN )
+ScreenWidth, ScreenHeight = fenetre.get_size()
+
+paddles = [
+    Paddle(700, 100, 100, 20, "Assets/paddlebleuv1.png"),
+]
+oldTime = pygame.time.get_ticks()
 IsGameRunning = 1
 fond = pygame.image.load("Assets/Nyan.PNG").convert()
 fond = pygame.transform.scale(fond, (ScreenWidth,ScreenHeight))
@@ -15,11 +20,30 @@ fenetre.blit(fond, (0,0))
 pygame.mixer.music.load('Assets/music.mp3')
 
 pygame.display.flip()
+
+def refresh():
+    pygame.display.flip()
+
+    fenetre.blit(fond, (0,0))
+    
+    for paddle in paddles:
+        paddle.draw(fenetre)
+
 while IsGameRunning:
     # deltatime
     t = pygame.time.get_ticks()
     deltaTime = (t - oldTime) / 1000.0
     oldTime = t
+
+    keys_pressed = pygame.key.get_pressed()
+    if keys_pressed[pygame.K_LEFT]:
+        paddles[0].move(deltaTime, -1, 0)
+        if(paddles[0].isTouchingWallX()):
+            paddles[0].move(deltaTime, 1, 0)
+    if keys_pressed[pygame.K_RIGHT]:
+        paddles[0].move(deltaTime, 1, 0)
+        if(paddles[0].isTouchingWallX()):
+            paddles[0].move(deltaTime, -1, 0)
 
     for event in pygame.event.get():
         if event.type == QUIT : # ECHAP
@@ -27,18 +51,7 @@ while IsGameRunning:
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 IsGameRunning = 0
-<<<<<<< HEAD
-=======
-    keys_pressed = pygame.key.get_pressed()
-    if keys_pressed[pygame.K_LEFT]:
-        if xpos >= 340:
-            xpos -= 1  
-            time.sleep(0.002)
-    if keys_pressed[pygame.K_RIGHT]:
-        if xpos + 100 <= 1060:
-            xpos += 1
-            time.sleep(0.002)
-    
->>>>>>> a9ce60bd58e90a91ac6a76efe96c7f1fce0dc324
+
+    refresh()
 
         
