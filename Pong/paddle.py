@@ -1,10 +1,10 @@
 class Paddle:
-    def __init__(self, x, y):
+    def __init__(self, x, y, w, h):
         self.x = x
         self.y = y
-        self.width = 20
-        self.height = 100
+        self.width = w
+        self.height = h
     
-    def move(mx, my, dt):
+    def move(self, mx, my, dt):
         self.x += mx * dt
         self.y += my * dt

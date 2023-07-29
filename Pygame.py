@@ -2,11 +2,17 @@ import pygame
 from pygame.locals import *
 import time
 import random
+from Pong.paddle import Paddle
+
 def refresh():
     pygame.display.flip
 pygame.init()
 fenetre = pygame.display.set_mode((1366,720), FULLSCREEN )
 ScreenWidth, ScreenHeigh = fenetre.get_size()
+
+paddles = [
+    Paddle(100, 100, 100, 20),
+]
 
 oldTime = pygame.time.get_ticks()
 
@@ -30,7 +36,7 @@ class Particle():
 
 IsGameRunning = 1
 fond = pygame.image.load("Assets/Nyan.PNG").convert()
-fond = pygame.transform.scale(fond, (1366, 768))
+fond = pygame.transform.scale(fond, (1400, 720))
 fenetre.blit(fond, (0,0))
 pygame.display.flip()
 while IsGameRunning:
@@ -41,8 +47,8 @@ while IsGameRunning:
 
     particles = []
     for part in range(300):
-        if part % 2 > 0: col = black
-        else: col = grey
+        if part % 2 > 0: col = "black"
+        else: col = "grey"
         particles.append( Particle(515, 500, col) )
     for p in particles:
             p.move()
