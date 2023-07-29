@@ -15,6 +15,7 @@ oldTime = pygame.time.get_ticks()
 IsGameRunning = 2
 accueil = pygame.image.load("Assets/Nyan.png").convert()
 accueil = pygame.transform.scale(accueil, (ScreenWidth,ScreenHeight))
+playbutton = pygame.image.load("Assets/Play.png").convert_alpha()
 fond = pygame.image.load("Assets/backgroundv1.png").convert()
 fond = pygame.transform.scale(fond, (ScreenWidth,ScreenHeight))
 surcouche = pygame.image.load("Assets/backgroundcarrev1.png").convert()
@@ -32,6 +33,7 @@ def refresh():
         paddle.draw(fenetre)
 while IsGameRunning == 2:
     fenetre.blit(accueil, (0,0))
+    fenetre.blit(playbutton,(500, 500))
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == KEYDOWN:
